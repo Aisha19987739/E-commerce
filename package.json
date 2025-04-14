@@ -22,4 +22,8 @@
     "mongoose": "^8.13.2",
     "typescript": "^5.8.3"
   }
+  ,
+   
+  "format": "prettier --write ."
+
 }
