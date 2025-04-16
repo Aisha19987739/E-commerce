@@ -5,7 +5,8 @@ export const getallProduct = async () => {
 };
 export const seedinitialProducts = async () => {
   const products = [
-    { title: "Dell Laptop", price: 1000, mage: "./image/img1", sock: 100 },
+    { title: "Dell Laptop", price:100, image: "./image/img1",stock:10 },
+  
   ];
   const exsitingProducts = await getallProduct();
   if (exsitingProducts.length === 0) {

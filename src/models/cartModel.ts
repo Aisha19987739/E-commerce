@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document, ObjectId } from "mongoose";
 import { Iproduct } from "./productModules";
 const CartStatusEnum = ["Active", "Completed"];
-export interface IcartItem extends Document {
+export interface IcartItem  {
   product: Iproduct;
   unitPrice: number;
   quantitiy: number;
@@ -23,4 +23,5 @@ const cartSchema = new Schema<Icart>({
   totalAmount: { type: Number, required: true },
   status: { type: String, enum: CartStatusEnum, default: "Active" },
 });
-export const cartModel = mongoose.model<Icart>("Cart", cartSchema);
+ const cartModel = mongoose.model<Icart>("Cart", cartSchema);
+ export default cartModel

@@ -9,7 +9,7 @@ const productSchema =new Schema<Iproduct>({
     title:{type:String, required:true},
     image:{type:String},
     price:{type:Number, required:true},
-    stock:{type:Number, required:true, default:0}
+    stock:{type:Number, required:true,default:0}
 
 });
 export const productModules = mongoose.model<Iproduct>('product',productSchema);

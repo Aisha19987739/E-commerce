@@ -3,10 +3,8 @@ import { NextFunction,Response} from "express";
 import { Request } from "express";
 import jwt from "jsonwebtoken";
 import  userModel  from "../models/userModel";
-export interface ExtendsRequest extends Request {
-    user?: any;
-  }
-  
+import { ExtendsRequest } from "../types/ExtendsRequest";
+
 const validateJwt = (req:ExtendsRequest , res:Response , next:NextFunction)=>{
 
     const authorizationHeader=req.get('authorization');
@@ -19,7 +17,8 @@ const validateJwt = (req:ExtendsRequest , res:Response , next:NextFunction)=>{
     if(!token){
         res.status(403).send("Barrer token not found");
         return;
-    } 
+    }
+    
 
     jwt.verify (token,"WlRvM3kZ3A",async(err,payload)=>{
     if(err){
