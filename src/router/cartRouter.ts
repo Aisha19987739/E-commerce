@@ -1,7 +1,7 @@
 import express, { Response } from "express";
 import { ExtendsRequest } from "../types/ExtendsRequest";
 import validateJwt from "../middleWare/validateJWT";
-import { addItemToCart, updateItemIncart, getActivCartForUser, deletItemIncart,clearCart } from "../services/cartService";
+import { addItemToCart, updateItemIncart, getActivCartForUser, deletItemIncart,clearCart, checkout } from "../services/cartService";
 import { ExitStatus } from "typescript";
 
 
@@ -41,6 +41,12 @@ router.put("/items", validateJwt, async (req: ExtendsRequest, res) => {
   const response = await clearCart({userId})
  res.status( response.statusCode).send(response.data);
  }
- )
+ );
+ router.post("/checkout",validateJwt,async(req:ExtendsRequest,res)=>{
+  const userId=req.user._id;
+  const {address}=req.body;
+  const response = await checkout({userId,address})
+  res.status( response.statusCode).send(response.data);
+ })
 
 export default router;

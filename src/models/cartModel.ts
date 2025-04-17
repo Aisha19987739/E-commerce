@@ -11,7 +11,7 @@ export interface Icart extends Document {
   userId: ObjectId | string;
   items: IcartItem[];
   totalAmount: number;
-  status: "Active" | "completed";
+  status: "Active" | "Completed";
 }
 const IcartItemSchema = new Schema<IcartItem>({
   product: { type: Schema.Types.ObjectId, ref: "product", required: true },

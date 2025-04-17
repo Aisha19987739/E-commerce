@@ -1,4 +1,5 @@
 import cartModel, { Icart, IcartItem } from "../models/cartModel";
+import {  IorderItem, OderModel } from "../models/orderModel";
 import { productModules } from "../models/productModules";
 
 interface createCartForUser {
@@ -157,3 +158,47 @@ const calculateTotalAmount=({cartItems}:{cartItems:IcartItem[];})=>{
   }, 0);
 return total;
 }
+interface Checkout
+{
+  userId:string;
+  address:string
+}
+export const checkout = async ({userId,address}:Checkout)=>{
+  if (!address)
+  {
+    return {data:"Please Enter address",statusCode:400}
+  }
+  const cart = await getActivCartForUser({userId})
+  const orderItems : IorderItem[] = [];
+  //loop CartItems and create orderItem
+  for(const item of cart.items)
+  {
+    const product = await productModules.findById(item.product);
+    if(!product)
+    {
+      return {data:"product not found", statusCode:400}
+    }
+  
+  const orderItem :IorderItem = {
+    productTitle :product!.title,
+    productImage :product!.image,
+    quantity:item.quantity,
+    unitprice:item.unitPrice
+
+  };
+  orderItems.push(orderItem);
+}
+const order = await OderModel.create({
+  orderItems,
+  total:cart.totalAmount,
+  address,
+  userId
+});
+await order.save();
+cart.status="Completed";
+await cart.save();
+return {data:order,statusCode:200};
+
+}
+
+
