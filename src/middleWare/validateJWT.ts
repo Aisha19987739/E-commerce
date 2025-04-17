@@ -6,6 +6,7 @@ import  userModel  from "../models/userModel";
 import { ExtendsRequest } from "../types/ExtendsRequest";
 
 const validateJwt = (req:ExtendsRequest , res:Response , next:NextFunction)=>{
+   
 
     const authorizationHeader=req.get('authorization');
     if(!authorizationHeader)

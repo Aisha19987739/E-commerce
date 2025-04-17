@@ -4,6 +4,9 @@ import userRoute from "./router/userRoute";
 import { seedinitialProducts } from "./services/productService";
 import productRoute from "./router/productRoute";
 import cartRouter from "./router/cartRouter";
+
+
+
 const app = express();
 const port = 3001;
 app.use(express.json());
@@ -21,6 +24,8 @@ seedinitialProducts();
 app.use("/user", userRoute);
 app.use("/product", productRoute);
 app.use("/cart", cartRouter);
+
+
 app.listen(port, () => {
   console.log(`Server is running on port:${port}`);
 });

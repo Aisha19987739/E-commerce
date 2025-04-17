@@ -4,7 +4,8 @@ const CartStatusEnum = ["Active", "Completed"];
 export interface IcartItem  {
   product: Iproduct;
   unitPrice: number;
-  quantitiy: number;
+  quantity
+: number;
 }
 export interface Icart extends Document {
   userId: ObjectId | string;
@@ -15,7 +16,8 @@ export interface Icart extends Document {
 const IcartItemSchema = new Schema<IcartItem>({
   product: { type: Schema.Types.ObjectId, ref: "product", required: true },
   unitPrice: { type: Number, required: true },
-  quantitiy: { type: Number, required: true },
+  quantity
+: { type: Number, required: true },
 });
 const cartSchema = new Schema<Icart>({
   userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
