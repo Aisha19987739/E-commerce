@@ -1,6 +1,6 @@
 import cartModel, { Icart, IcartItem } from "../models/cartModel";
 import {  IorderItem, OderModel } from "../models/orderModel";
-import { productModules } from "../models/productModules";
+import { productModules } from "../models/productModel";
 
 interface createCartForUser {
   userId: string;

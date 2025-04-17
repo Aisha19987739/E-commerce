@@ -1,17 +1,29 @@
-import { request, response, Router } from "express";
+import { request, response, Router,Request,Response } from "express";
 import express from "express";
 import { login, register } from "../services/userservices";
 
 const router=  express.Router();
-router.post('/register', async (request,response)=>{
-    const {firstName,lastName,email,password}=request.body;
+router.post('/register', async (req:Request,res:Response)=>{
+    try{
+    const {firstName,lastName,email,password}=req.body;
     const {statusCode,data}= await register({firstName,lastName,email,password})
-    response.status(statusCode).send(data);
+    res.status(statusCode).send(data);
+    }
+    catch{
+    
+       res.status(500).send("Something went worng!")
+    }
+
 });
-router.post('/login', async (request,response)=>{
+router.post('/login', async (req:Request,res:Response)=>{
+    try{
     const {email,password}=request.body;
     const {statusCode,data}= await login({email,password})
-    response.status(statusCode).send(data);
+    res.status(statusCode).send(data);
+    }
+    catch{
+        res.status(500).send("Something went worng!")
+      }
 
 })
 
