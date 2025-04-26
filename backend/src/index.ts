@@ -5,7 +5,7 @@ import userRoute from "./router/userRoute";
 import { seedinitialProducts } from "./services/productService";
 import productRoute from "./router/productRoute";
 import cartRouter from "./router/cartRouter";
-import  cors from 'cors';
+import cors from "cors";
 
 dotenv.config();
 
@@ -14,7 +14,7 @@ const port = 3001;
 app.use(express.json());
 app.use(cors());
 mongoose
-  .connect(process.env.DATABASE_URL || '')
+  .connect(process.env.DATABASE_URL|| "")
   .then(() => {
     console.log("Connected !");
   })
@@ -24,10 +24,9 @@ mongoose
 
 seedinitialProducts();
 
-app.use("/user", userRoute);
+app.use('/user', userRoute);
 app.use("/product", productRoute);
 app.use("/cart", cartRouter);
-
 
 app.listen(port, () => {
   console.log(`Server is running on port:${port}`);

@@ -5,21 +5,20 @@ import { useRef, useState } from "react";
 import { BASE_URl } from "../constant/baseUrl";
 import { UseAuth } from "../context/Auth/AuthContext";
 
-const RegisterPage = () => { 
+const LoginPage = () => { 
     const [error,SetError]=useState("");
-  const firstNameRef = useRef<HTMLInputElement>(null);
-  const lastNameRef = useRef<HTMLInputElement>(null);
+  
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const {login}=UseAuth();
   
+  
   const onSubmit = async () => {
-    const firstName = firstNameRef.current?.value;
-    const lastName = lastNameRef.current?.value;
+    
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
     //validate the form data
-    if (!firstName || !lastName ||!email || !password)
+    if ( !email || !password)
         {  
             SetError('check submitted data')
             return;
@@ -29,17 +28,17 @@ const RegisterPage = () => {
     
     // Make the call to API to Create the user
 
-    console.log(firstName, lastName, email, password);
-    const response = await fetch(`${BASE_URl}/user/register`, {
+    console.log( email, password);
+    const response = await fetch(`${BASE_URl}/user/login`, {
         method: "POST", 
-      body: JSON.stringify({ firstName, lastName, password, email }),
+      body: JSON.stringify({password,email }),
       headers: {
         "Content-Type": "application/json",
       },
     });
     if (!response.ok)
     {
-        SetError("Unable to register user,please try diffrenet creditionals!")
+        SetError("Unable to login. Please check your credentials and try again.");
         return;
     }
     
@@ -69,7 +68,7 @@ const RegisterPage = () => {
           mt: 4,
         }}
       >
-        <Typography variant="h6">Creat New Account</Typography>
+        <Typography variant="h6">Login to Your Account</Typography>
         <Box
           sx={{
             display: "flex",
@@ -81,12 +80,7 @@ const RegisterPage = () => {
             p: 2,
           }}
         >
-          <TextField
-            inputRef={firstNameRef}
-            label="first Name"
-            name="firstName"
-          />
-          <TextField inputRef={lastNameRef} label="last Name" name="lastName" />
+         
           <TextField inputRef={emailRef} label="Email" name="email" />
           <TextField
             inputRef={passwordRef}
@@ -95,7 +89,7 @@ const RegisterPage = () => {
             type="password"
           />
           <Button onClick={onSubmit} variant="contained">
-            Register
+            login
           </Button>
           {error && <Typography sx={{color:"red"}}>{error}</Typography>}
         </Box>
@@ -103,4 +97,4 @@ const RegisterPage = () => {
     </Container>
   );
 };
-export default RegisterPage;
+export default LoginPage;
