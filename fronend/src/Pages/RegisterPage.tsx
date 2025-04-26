@@ -4,6 +4,7 @@ import Container from "@mui/material/Container";
 import { useRef, useState } from "react";
 import { BASE_URl } from "../constant/baseUrl";
 import { UseAuth } from "../context/Auth/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => { 
     const [error,SetError]=useState("");
@@ -12,6 +13,7 @@ const RegisterPage = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const {login}=UseAuth();
+  const navigate=useNavigate();
   
   const onSubmit = async () => {
     const firstName = firstNameRef.current?.value;
@@ -53,6 +55,7 @@ const RegisterPage = () => {
     }
    
    login(email,token);
+   navigate("/");
 
   
     

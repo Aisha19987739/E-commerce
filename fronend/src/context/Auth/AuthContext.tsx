@@ -4,6 +4,7 @@ import { createContext, useContext } from "react"
     userName:string|null,
     token:string|null,
     login : ( userName:string,token:string) =>void
+    isAuthentcated:boolean;
 }
-export const AuthContext = createContext<AuthContextType >({userName:null,token:null,login:()=>{}})
+export const AuthContext = createContext<AuthContextType >({userName:null,token:null,login:()=>{},isAuthentcated:false})
 export const UseAuth = ()=>useContext(AuthContext);

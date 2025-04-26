@@ -11,10 +11,12 @@ const AuthProvider : FC<PropsWithChildren> = ({ children}) =>{
         setToken(token);
         localStorage.setItem('userName',userName);
         localStorage.setItem('token',token)
+       
 
     }
+    const isAuthentcated = !!token;
     return(
-       < AuthContext.Provider value={{userName,token,login }}>
+       < AuthContext.Provider value={{userName,token,login , isAuthentcated}}>
         {children}
        </AuthContext.Provider>
     )

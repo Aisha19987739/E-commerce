@@ -3,7 +3,7 @@ import Navbar from "./Components/Navbar"
 import HomePage from "./Pages/HomePage"
 import RegisterPage from "./Pages/RegisterPage"
 import AuthProvider from "./context/Auth/AuthProvider"
-import LoginPage from "./Pages/loginPage"
+import LoginPage from "./Pages/LoginPage"
 
 
 
