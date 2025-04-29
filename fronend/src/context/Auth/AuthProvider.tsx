@@ -1,25 +1,34 @@
 import { FC, PropsWithChildren, useState } from "react";
 import { AuthContext } from "./AuthContext";
+const USER_NAME='userName';
+const TOKEN_KEY='token'
 
-const AuthProvider : FC<PropsWithChildren> = ({ children}) =>{
-    const [userName,setuserName]=useState<string | null>(localStorage.getItem('userName'));
-    const [token,setToken]=useState<string | null>(localStorage.getItem('token'));
-       
- 
-    const login=( userName:string, token:string )=>{
-        setuserName (userName);
-        setToken(token);
-        localStorage.setItem('userName',userName);
-        localStorage.setItem('token',token)
-       
+const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
+  const [userName, setuserName] = useState<string | null>(
+    localStorage.getItem( USER_NAME)
+  );
+  const [token, setToken] = useState<string | null>(
+    localStorage.getItem(TOKEN_KEY)
+  );
+  const isAuthentcated = !!token;
 
-    }
-    const isAuthentcated = !!token;
-    return(
-       < AuthContext.Provider value={{userName,token,login , isAuthentcated}}>
-        {children}
-       </AuthContext.Provider>
-    )
-
-}
-export default AuthProvider
+  const login = (userName: string, token: string) => {
+    setuserName(userName);
+    setToken(token);
+    localStorage.setItem(USER_NAME, userName);
+    localStorage.setItem(TOKEN_KEY, token);
+  };
+  const logout =()=>{
+    localStorage.removeItem(USER_NAME)
+    localStorage.removeItem(TOKEN_KEY)
+    setuserName(null)
+    setToken(null)
+  }
+  
+  return (
+    <AuthContext.Provider value={{ userName, token,isAuthentcated, login,logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+export default AuthProvider;
