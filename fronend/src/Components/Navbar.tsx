@@ -13,7 +13,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import ShoppingCart from "@mui/icons-material/ShoppingCart";
 import { UseAuth } from "../context/Auth/AuthContext";
 import Grid from "@mui/material/Grid";
-import { Button } from "@mui/material";
+import { Badge, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 function Navbar() {
@@ -39,6 +39,9 @@ function Navbar() {
     navigate("/");
     handleCloseUserMenu();
   };
+  const handleCart=()=>{
+    navigate("/cart");
+  }
 
   return (
     <AppBar position="static">
@@ -84,7 +87,11 @@ function Navbar() {
               alignItems="center"
               justifyContent="center"
             >
-              <ShoppingCart />
+               <IconButton aria-label="cart" onClick={handleCart}>
+      <Badge badgeContent={4} color="secondary">
+        <ShoppingCart sx={{color:'#ffffff'}}/>
+      </Badge>
+    </IconButton>
               {isAuthentcated ? (
                 <>
                   <Tooltip title="Open settings">

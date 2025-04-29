@@ -4,6 +4,7 @@ import HomePage from "./Pages/HomePage"
 import RegisterPage from "./Pages/RegisterPage"
 import AuthProvider from "./context/Auth/AuthProvider"
 import LoginPage from "./Pages/LoginPage"
+import CartPage from "./Pages/CartPage"
 
 
 
@@ -20,6 +21,8 @@ function App() {
     <Route path="/" element={<HomePage/>}/>
     <Route path="/register" element={<RegisterPage/>}/>
     <Route path="/login" element={<LoginPage/>}/>
+    <Route path="/cart" element={<CartPage/>}/>
+    
     
     </Routes>
     </BrowserRouter>
