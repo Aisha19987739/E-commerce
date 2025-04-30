@@ -16,7 +16,7 @@ const validateJwt = (req:ExtendsRequest , res:Response , next:NextFunction)=>{
     }
     const token=authorizationHeader.split(" ")[1];
     if(!token){
-        res.status(403).send("Barrer token not found");
+        res.status(403).send("Bearer token not found");
         return;
     }
     
@@ -33,7 +33,10 @@ const validateJwt = (req:ExtendsRequest , res:Response , next:NextFunction)=>{
     };
     //fetch user  from database based on the bayload
     const user = await userModel.findOne({email:userPayload.email});
+    if (!user) {
+        return res.status(404).json({ message: "User not found" });}
     req.user= user;
+
     next();
 });
 };
