@@ -2,10 +2,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Navbar from "./Components/Navbar"
 import HomePage from "./Pages/HomePage"
 import RegisterPage from "./Pages/RegisterPage"
-import AuthProvider from "./context/Auth/AuthProvider"
+import AuthProvider from "./context/Auth/Auth/AuthProvider"
 import LoginPage from "./Pages/LoginPage"
 import CartPage from "./Pages/CartPage"
 import ProtectedRoute from "./Components/ProtectedRoute"
+import CartProvider from "./context/Auth/Cart/CartProvider"
 
 
 
@@ -16,6 +17,7 @@ function App() {
 
   return (
     <AuthProvider>
+      <CartProvider>
     <BrowserRouter>
     <Navbar/>
     <Routes>
@@ -30,6 +32,7 @@ function App() {
     
     </Routes>
     </BrowserRouter>
+    </CartProvider>
     </AuthProvider>
    
   )

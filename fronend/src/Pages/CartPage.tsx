@@ -1,7 +1,7 @@
 import { Container, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { BASE_URl } from "../constant/baseUrl";
-import { UseAuth}  from "../context/Auth/AuthContext";
+import { UseAuth}  from "../context/Auth/Auth/AuthContext";
 
 const CartPage=()=>{ 
     const { token,initialized } = UseAuth();

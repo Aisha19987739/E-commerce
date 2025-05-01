@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { useRef, useState } from "react";
 import { BASE_URl } from "../constant/baseUrl";
-import { UseAuth } from "../context/Auth/AuthContext";
+import { UseAuth } from "../context/Auth/Auth/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => { 
