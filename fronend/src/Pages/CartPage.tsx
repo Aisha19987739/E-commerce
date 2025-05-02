@@ -1,56 +1,58 @@
-import { Container, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { BASE_URl } from "../constant/baseUrl";
 import { UseAuth}  from "../context/Auth/Auth/AuthContext";
+import { UseCart } from "../context/Auth/Cart/CartContext";
 
 const CartPage=()=>{ 
-    const { token,initialized } = UseAuth();
+   // const { token,initialized } = UseAuth();
     
-    const [cart,setCart]=useState();
+    const{cartItems,totalAmount}=UseCart(); 
     const [error,setError]=useState(' ');
   
-console.log({token});
-    useEffect(()=>{ 
+
+    // useEffect(()=>{ 
         
-        if(!initialized)
-        {
-            console.log("Login");
-        }
+    //     if(!initialized)
+    //     {
+    //         console.log("Login");
+    //     }
       
         
-        if (!token) {
-            console.warn("Token is not ready yet, skipping fetch.");
-            return;
-          }
-        const fetchCart = async() =>{
-            const response = await fetch(`${BASE_URl}/cart`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                  }
+    //     if (!token) {
+    //         console.warn("Token is not ready yet, skipping fetch.");
+    //         return;
+    //       }
+    //     const fetchCart = async() =>{
+    //         const response = await fetch(`${BASE_URl}/cart`, {
+    //             headers: {
+    //                 Authorization: `Bearer ${token}`,
+    //               }
                   
-              });
-               if (!response.ok) {
-                    const text = await response.text();
-                    setError(`Server error: ${text}`);
-                    console.error("Fetch /cart failed:", text);
+    //           });
+    //            if (!response.ok) {
+    //                 const text = await response.text();
+    //                 setError(`Server error: ${text}`);
+    //                 console.error("Fetch /cart failed:", text);
 
-                    return;
-                  }
+    //                 return;
+    //               }
                   
             
-            const data = await response.json();
-            setCart(data);
+           
 
+    //     };
+    //     fetchCart();
 
-        };
-        fetchCart();
-
-    },[token,initialized])
-    console.log({cart});
+    // },[token,initialized])
+   
     return (
         <>
          <Container sx={{mt:10}}>
             <Typography variant="h4">my Cart</Typography>
+            {cartItems.map((item)=>(
+                <Box>{item.title}</Box>
+            ))}
             
          </Container>
         </>
