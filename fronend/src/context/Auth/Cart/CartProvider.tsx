@@ -12,6 +12,48 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const [error,setError]=useState(' ')
+   useEffect(()=>{ 
+        
+        
+      
+        
+        if (!token) {
+            console.warn("Token is not ready yet, skipping fetch.");
+            return;
+          }
+        const fetchCart = async() =>{
+            const response = await fetch(`${BASE_URl}/cart`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                  }
+                  
+              });
+               if (!response.ok) {
+                    const text = await response.text();
+                    setError(`Server error: ${text}`);
+                    console.error("Fetch /cart failed:", text);
+
+                    return;
+                  }
+                  const cart =await response.json();
+                  
+
+                  
+                  const cartItemsMapped = cart.items.map(({ product, quantity }: { product: any; quantity: number }) => ({
+                    productId: product._id,
+                    title: product.title,
+                    image: product.image,
+                    quantity,
+                    unitPrice: product.unitPrice,
+                  }));
+                  setCartItems(cartItemsMapped);
+            
+           
+
+        };
+        fetchCart();
+
+    },[token])
   const addItemToCart= async(productId:string)=>{
     try{
       const response= await fetch(`${BASE_URl}/cart/items`,{
@@ -33,13 +75,7 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
       }
       const cart = await response.json();
       if(!cart){setError("Failed to parse cart data")}
-      const cartItemsMapped = cart.items.map(({ product, quantity }: { product: any; quantity: number }) => ({
-        productId: product._id,
-        title: product.title,
-        image: product.image,
-        quantity,
-        unitPrice: product.unitPrice,
-      }));
+     
       
       setCartItems([...cart.items]);
       setTotalAmount(cart.totalAmount)

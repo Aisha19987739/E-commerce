@@ -11,40 +11,7 @@ const CartPage=()=>{
     const [error,setError]=useState(' ');
   
 
-    // useEffect(()=>{ 
-        
-    //     if(!initialized)
-    //     {
-    //         console.log("Login");
-    //     }
-      
-        
-    //     if (!token) {
-    //         console.warn("Token is not ready yet, skipping fetch.");
-    //         return;
-    //       }
-    //     const fetchCart = async() =>{
-    //         const response = await fetch(`${BASE_URl}/cart`, {
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`,
-    //               }
-                  
-    //           });
-    //            if (!response.ok) {
-    //                 const text = await response.text();
-    //                 setError(`Server error: ${text}`);
-    //                 console.error("Fetch /cart failed:", text);
-
-    //                 return;
-    //               }
-                  
-            
-           
-
-    //     };
-    //     fetchCart();
-
-    // },[token,initialized])
+   
    
     return (
         <>
