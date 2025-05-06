@@ -1,7 +1,7 @@
 import express, { Response } from "express";
 import { ExtendsRequest } from "../types/ExtendsRequest";
 import validateJwt from "../middleWare/validateJWT";
-import { addItemToCart, updateItemIncart, getActivCartForUser, deletItemIncart,clearCart, checkout } from "../services/cartService";
+import { addItemToCart, getActivCartForUser, deletItemIncart,clearCart, checkout, updateItemInCart } from "../services/cartService";
 import { ExitStatus } from "typescript";
 
 
@@ -34,11 +34,13 @@ router.post("/items", validateJwt, async (req: ExtendsRequest, res) => {
 });
 
 router.put("/items", validateJwt, async (req: ExtendsRequest, res) => {
+ 
   
 try{
   const userId = req.user._id;
   const { productId, quantity } = req.body;
-  const response = await updateItemIncart({ userId, productId, quantity });
+  
+  const response = await updateItemInCart({ userId, productId, quantity });
   res.status(response.statusCode!).send(response.data);
 }
   catch{
