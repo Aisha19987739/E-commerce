@@ -12,12 +12,12 @@ const CreateCartForUser = async ({ userId }: createCartForUser) => {
 };
 export interface GetActivCartForUser {
   userId: string;
-  populateProduct: boolean;
+  populateProduct?: boolean;
 }
 
 export const getActivCartForUser = async ({
   userId,
-  populateProduct,
+  populateProduct =false,
 }: GetActivCartForUser) => {
   let cart;
   if (populateProduct) {
@@ -36,12 +36,14 @@ export const getActivCartForUser = async ({
 interface ClearCart {
   userId: string;
 }
+
 export const clearCart = async ({ userId }: ClearCart) => {
-  const cart = await getActivCartForUser({ userId, populateProduct: true });
+  const cart = await getActivCartForUser({ userId});
   cart.items = [];
   cart.totalAmount = 0;
-  const updatedCart = await cart.save();
-  return { data: updatedCart, statusCode: 200 };
+  const updatedCart =await cart.save();
+  
+  return { data: await getActivCartForUser({ userId, populateProduct: true }), statusCode: 200 };
 };
 export interface AddItemToCart {
   productId: any;

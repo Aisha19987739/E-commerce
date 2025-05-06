@@ -60,7 +60,8 @@ try{
 
 
  });
- router.delete("",validateJwt,async(req:ExtendsRequest,res)=>{
+ 
+ router.delete("/",validateJwt,async(req:ExtendsRequest,res)=>{
   try{
   const userId=req.user._id;
   const response = await clearCart({userId})

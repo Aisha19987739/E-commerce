@@ -7,6 +7,7 @@ import {CartItem } from "../../../types/CartItem";
     addItemToCart:(productId:string) => void
     updateItemInCart:(productId:string,quantity:number)=>void
     removItemInCart:(productId:string)=>void
+    clearCart:()=>void
 
     
 
@@ -16,7 +17,8 @@ export const CartContext = createContext<CartContextType>({
     totalAmount:0,
     addItemToCart:()=>{},
     updateItemInCart:()=>{},
-    removItemInCart:()=>{}
+    removItemInCart:()=>{},
+    clearCart:()=>{}
     
 
   
