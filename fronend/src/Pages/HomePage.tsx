@@ -1,6 +1,5 @@
 import Grid from '@mui/material/GridLegacy';
 import  Container  from '@mui/material/Container';
-
 import ProductCard from '../Components/ProductCard';
 import { useEffect, useState } from 'react';
 import Product from "../types/Product";
