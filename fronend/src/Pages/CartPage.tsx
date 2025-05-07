@@ -2,6 +2,7 @@ import { Box, Container, Typography } from "@mui/material";
 import { UseCart } from "../context/Auth/Cart/CartContext";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
+import { useNavigate } from "react-router-dom";
 
 const CartPage = () => {
   const {
@@ -11,6 +12,7 @@ const CartPage = () => {
     removItemInCart,
     clearCart,
   } = UseCart();
+  const navigate=useNavigate();
 
   const handleQuantity = (productId: string, quantity: number) => {
     updateItemInCart(productId, quantity);
@@ -18,6 +20,10 @@ const CartPage = () => {
   const hadleRemveItem = (productId: string) => {
     removItemInCart(productId);
   };
+  const handleCheckout=()=>{
+    navigate("/checkout");
+
+   }
   const renderCartItem = () => (
     <Box display={"flex"} flexDirection={"column"} gap={4}>
       {cartItems.map((item) => (
@@ -31,6 +37,7 @@ const CartPage = () => {
             borderColor: "#f2f2f2",
             borderRadius: 5,
             padding: 1,
+            
           }}
         >
           <Box display="flex" flexDirection="row" alignItems="center" gap={1}>
@@ -61,8 +68,9 @@ const CartPage = () => {
           </ButtonGroup>
         </Box>
       ))}
-      <Box>
+      <Box display='flex'  flexDirection="row" justifyContent='space-between'>
         <Typography>Total Amount : {totalAmount.toFixed(2)} $</Typography>
+        <Button onClick={handleCheckout} variant="contained" > Go to Checkout</Button>
       </Box>
     </Box>
   );

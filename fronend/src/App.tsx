@@ -7,6 +7,7 @@ import LoginPage from "./Pages/LoginPage"
 import CartPage from "./Pages/CartPage"
 import ProtectedRoute from "./Components/ProtectedRoute"
 import CartProvider from "./context/Auth/Cart/CartProvider"
+import CheckoutPage from "./Pages/CheckoutPage"
 
 
 
@@ -26,6 +27,7 @@ function App() {
     <Route path="/login" element={<LoginPage/>}/> 
     <Route element={<ProtectedRoute/>}>
     <Route path="/cart" element={<CartPage/>}/>
+    <Route path="/checkout" element={<CheckoutPage/>}/>
     </Route>
  
     
