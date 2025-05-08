@@ -6,59 +6,51 @@ import { BASE_URl } from "../constant/baseUrl";
 import { UseAuth } from "../context/Auth/Auth/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-const RegisterPage = () => { 
-    const [error,SetError]=useState("");
+const RegisterPage = () => {
+  const [error, SetError] = useState("");
   const firstNameRef = useRef<HTMLInputElement>(null);
   const lastNameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-  const {login}=UseAuth();
-  const navigate=useNavigate();
-  
+  const { login } = UseAuth();
+  const navigate = useNavigate();
+
   const onSubmit = async () => {
     const firstName = firstNameRef.current?.value;
     const lastName = lastNameRef.current?.value;
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
     //validate the form data
-    if (!firstName || !lastName ||!email || !password)
-        {  
-            SetError('check submitted data')
-            return;
-        }
+    if (!firstName || !lastName || !email || !password) {
+      SetError("check submitted data");
+      return;
+    }
 
-
-    
     // Make the call to API to Create the user
 
     console.log(firstName, lastName, email, password);
     const response = await fetch(`${BASE_URl}/user/register`, {
-        method: "POST", 
+      method: "POST",
       body: JSON.stringify({ firstName, lastName, password, email }),
       headers: {
         "Content-Type": "application/json",
       },
     });
-    if (!response.ok)
-    {
-        SetError("Unable to register user,please try diffrenet creditionals!")
-        return;
+    if (!response.ok) {
+      SetError("Unable to register user,please try diffrenet creditionals!");
+      return;
     }
-    
-    const token = await response.text();  // 👈 
 
-    // after post(give us token) 
-    if (!token)
-    {
-        SetError("Incorrect token");
-        return;
+    const token = await response.text(); // 👈
+
+    // after post(give us token)
+    if (!token) {
+      SetError("Incorrect token");
+      return;
     }
-   
-   login(email,token);
-   navigate("/");
 
-  
-    
+    login(email, token);
+    navigate("/");
   };
 
   return (
@@ -100,7 +92,7 @@ const RegisterPage = () => {
           <Button onClick={onSubmit} variant="contained">
             Register
           </Button>
-          {error && <Typography sx={{color:"red"}}>{error}</Typography>}
+          {error && <Typography sx={{ color: "red" }}>{error}</Typography>}
         </Box>
       </Box>
     </Container>

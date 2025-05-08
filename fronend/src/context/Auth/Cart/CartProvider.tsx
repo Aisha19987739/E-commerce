@@ -9,7 +9,7 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const [error, setError] = useState(" ");
-  const [myOrders,setmyOrders]=useState();
+
   useEffect(() => {
     if (!token) {
       console.warn("Token is not ready yet, skipping fetch.");
@@ -48,9 +48,6 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
         })
       );
 
-
-
-
       setCartItems(cartItemsMapped);
       setTotalAmount(cart.totalAmount);
     };
@@ -62,13 +59,13 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
       const existingItem = cartItems.find(
         (item) => item.productId === productId
       );
-  
+
       if (existingItem) {
         // المنتج موجود بالفعل، نزيد الكمية بدل الإضافة
         await updateItemInCart(productId, existingItem.quantity + 1);
         return;
       }
-  
+
       // المنتج غير موجود، نضيفه
       const response = await fetch(`${BASE_URl}/cart/items`, {
         method: "POST",
@@ -81,18 +78,18 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
           quantity: 1,
         }),
       });
-  
+
       if (!response.ok) {
         setError("Failed to add to cart");
         return;
       }
-  
+
       const cart = await response.json();
       if (!cart) {
         setError("Failed to parse cart data");
         return;
       }
-  
+
       const cartItemMapped = cart.items.map(
         ({ product, quantity }: { product: any; quantity: number }) => ({
           productId: product._id,
@@ -102,17 +99,15 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
           unitPrice: product.unitPrice,
         })
       );
-  
+
       setCartItems(cartItemMapped);
       setTotalAmount(cart.totalAmount);
     } catch (error) {
       console.error(error);
     }
   };
-  
-  const updateItemInCart = async (productId: string, quantity: number) => {
-   
 
+  const updateItemInCart = async (productId: string, quantity: number) => {
     try {
       const response = await fetch(`${BASE_URl}/cart/items`, {
         method: "PUT",
@@ -131,8 +126,7 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
         setError("Failed to parse cart data");
       }
 
-
-       const cartItemsMapped = cart.items.map(
+      const cartItemsMapped = cart.items.map(
         ({
           product,
           quantity,
@@ -163,7 +157,6 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-       
       });
 
       if (!response.ok) {
@@ -174,8 +167,7 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
         setError("Failed to parse cart data");
       }
 
-
-       const cartItemsMapped = cart.items.map(
+      const cartItemsMapped = cart.items.map(
         ({
           product,
           quantity,
@@ -206,7 +198,6 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-       
       });
 
       if (!response.ok) {
@@ -222,9 +213,6 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
       console.error(error);
     }
   };
- 
-
-  
 
   return (
     <CartContext.Provider
@@ -235,7 +223,6 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
         updateItemInCart,
         removItemInCart,
         clearCart,
-       
       }}
     >
       {children}

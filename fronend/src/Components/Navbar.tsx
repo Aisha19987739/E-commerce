@@ -19,7 +19,7 @@ import { UseCart } from "../context/Auth/Cart/CartContext";
 
 function Navbar() {
   const { userName, isAuthentcated, logout } = UseAuth();
-  const {cartItems}=UseCart()
+  const { cartItems } = UseCart();
 
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
@@ -41,14 +41,13 @@ function Navbar() {
     navigate("/");
     handleCloseUserMenu();
   };
-  const handleCart=()=>{
+  const handleCart = () => {
     navigate("/cart");
-  }
-  const handelMyOrders=()=>{
+  };
+  const handelMyOrders = () => {
     navigate("/my-orders");
     handleCloseUserMenu();
-
-  }
+  };
 
   return (
     <AppBar position="static">
@@ -63,30 +62,30 @@ function Navbar() {
               alignItems: "center",
             }}
           >
-            <Button sx={{color:"#ffffff"}} onClick={()=>navigate("/")}>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              <AdbIcon sx={{ display: "flex", mr: 1 }} />
-              <Typography
-                variant="h6"
-                noWrap
-                component="a"
+            <Button sx={{ color: "#ffffff" }} onClick={() => navigate("/")}>
+              <Box
                 sx={{
-                  mr: 2,
-                  display: { xs: "none", md: "flex" },
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  color: "inherit",
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
                 }}
               >
-                Tech Hub
-              </Typography>
-            </Box>
+                <AdbIcon sx={{ display: "flex", mr: 1 }} />
+                <Typography
+                  variant="h6"
+                  noWrap
+                  component="a"
+                  sx={{
+                    mr: 2,
+                    display: { xs: "none", md: "flex" },
+                    fontFamily: "monospace",
+                    fontWeight: 700,
+                    color: "inherit",
+                  }}
+                >
+                  Tech Hub
+                </Typography>
+              </Box>
             </Button>
 
             <Box
@@ -96,11 +95,11 @@ function Navbar() {
               alignItems="center"
               justifyContent="center"
             >
-               <IconButton aria-label="cart" onClick={handleCart}>
-      <Badge badgeContent={cartItems.length} color="secondary">
-        <ShoppingCart sx={{color:'#ffffff'}}/>
-      </Badge>
-    </IconButton>
+              <IconButton aria-label="cart" onClick={handleCart}>
+                <Badge badgeContent={cartItems.length} color="secondary">
+                  <ShoppingCart sx={{ color: "#ffffff" }} />
+                </Badge>
+              </IconButton>
               {isAuthentcated ? (
                 <>
                   <Tooltip title="Open settings">

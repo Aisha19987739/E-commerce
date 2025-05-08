@@ -1,5 +1,6 @@
 export interface CartItem{
-    [x: string]: string | undefined;
+    image: string | undefined;
+   
     productId:string,
     title:string,
     quantity:number,

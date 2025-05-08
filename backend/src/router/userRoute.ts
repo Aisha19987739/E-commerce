@@ -43,7 +43,7 @@ router.get(
   async (request: ExtendsRequest, response) => {
     try {
       const userId = request.user?._id;
-      const {stausCode,data} = await getMyOrders({ userId });
+      const { stausCode, data } = await getMyOrders({ userId });
       response.status(stausCode).send(data);
     } catch {
       response.status(500).send("Something went worng!");

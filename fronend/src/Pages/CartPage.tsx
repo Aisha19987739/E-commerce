@@ -12,7 +12,7 @@ const CartPage = () => {
     removItemInCart,
     clearCart,
   } = UseCart();
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const handleQuantity = (productId: string, quantity: number) => {
     updateItemInCart(productId, quantity);
@@ -20,10 +20,9 @@ const CartPage = () => {
   const hadleRemveItem = (productId: string) => {
     removItemInCart(productId);
   };
-  const handleCheckout=()=>{
+  const handleCheckout = () => {
     navigate("/checkout");
-
-   }
+  };
   const renderCartItem = () => (
     <Box display={"flex"} flexDirection={"column"} gap={4}>
       {cartItems.map((item) => (
@@ -37,11 +36,10 @@ const CartPage = () => {
             borderColor: "#f2f2f2",
             borderRadius: 5,
             padding: 1,
-            
           }}
         >
           <Box display="flex" flexDirection="row" alignItems="center" gap={1}>
-            <img src={item.image} width={50} />
+            <img src={item.productImages} width={50} />
             <Box>
               <Typography variant="h6">{item.title}</Typography>
 
@@ -68,9 +66,12 @@ const CartPage = () => {
           </ButtonGroup>
         </Box>
       ))}
-      <Box display='flex'  flexDirection="row" justifyContent='space-between'>
+      <Box display="flex" flexDirection="row" justifyContent="space-between">
         <Typography>Total Amount : {totalAmount.toFixed(2)} $</Typography>
-        <Button onClick={handleCheckout} variant="contained" > Go to Checkout</Button>
+        <Button onClick={handleCheckout} variant="contained">
+          {" "}
+          Go to Checkout
+        </Button>
       </Box>
     </Box>
   );

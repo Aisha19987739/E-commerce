@@ -6,58 +6,48 @@ import { BASE_URl } from "../constant/baseUrl";
 import { UseAuth } from "../context/Auth/Auth/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-const LoginPage = () => { 
-    const [error,SetError]=useState("");
-  
+const LoginPage = () => {
+  const [error, SetError] = useState("");
+
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-  const {login}=UseAuth();
-  const navigate=useNavigate();
-  
-  
+  const { login } = UseAuth();
+  const navigate = useNavigate();
+
   const onSubmit = async () => {
-    
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
     //validate the form data
-    if ( !email || !password)
-        {  
-            SetError('check submitted data')
-            return;
-        }
+    if (!email || !password) {
+      SetError("check submitted data");
+      return;
+    }
 
-
-    
     // Make the call to API to Create the user
 
-    console.log( email, password);
+    console.log(email, password);
     const response = await fetch(`${BASE_URl}/user/login`, {
-        method: "POST", 
-      body: JSON.stringify({password,email }),
+      method: "POST",
+      body: JSON.stringify({ password, email }),
       headers: {
         "Content-Type": "application/json",
       },
     });
-    if (!response.ok)
-    {
-        SetError("Unable to login. Please check your credentials and try again.");
-        return;
+    if (!response.ok) {
+      SetError("Unable to login. Please check your credentials and try again.");
+      return;
     }
-    
-    const token = await response.text();  // 👈 
 
-    // after post(give us token) 
-    if (!token)
-    {
-        SetError("Incorrect token");
-        return;
+    const token = await response.text(); // 👈
+
+    // after post(give us token)
+    if (!token) {
+      SetError("Incorrect token");
+      return;
     }
-   
-   login(email,token);
-   navigate('/');
 
-  
-    
+    login(email, token);
+    navigate("/");
   };
 
   return (
@@ -83,7 +73,6 @@ const LoginPage = () => {
             p: 2,
           }}
         >
-         
           <TextField inputRef={emailRef} label="Email" name="email" />
           <TextField
             inputRef={passwordRef}
@@ -94,7 +83,7 @@ const LoginPage = () => {
           <Button onClick={onSubmit} variant="contained">
             login
           </Button>
-          {error && <Typography sx={{color:"red"}}>{error}</Typography>}
+          {error && <Typography sx={{ color: "red" }}>{error}</Typography>}
         </Box>
       </Box>
     </Container>

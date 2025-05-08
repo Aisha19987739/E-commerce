@@ -24,7 +24,7 @@ const MyOrdersPage = () => {
       }}
     >
       {Array.isArray(myOrders) &&
-        myOrders.map(({ _id, address, total, orderItem }: any) => (
+        myOrders.map(({ _id, address, total, orderItem }) => (
           <Box
             key={_id}
             sx={{ border: 1, borderColor: "gray", borderRadius: 2, padding: 1 }}
@@ -32,7 +32,9 @@ const MyOrdersPage = () => {
             <Typography>id: {_id}</Typography>
             <Typography>address: {address}</Typography>
             <Typography>total: {total}</Typography>
-            <Typography>Items: {orderItem.length}</Typography>
+            <Typography>
+              Items: {Array.isArray(orderItem) ? orderItem.length : 0}
+            </Typography>
           </Box>
         ))}
     </Container>
