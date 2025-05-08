@@ -27,4 +27,4 @@ import mongoose, { ObjectId, Schema } from "mongoose";
     userId:{type:Schema.Types.ObjectId,ref:"User",required:true}
 
  })
- export const OderModel = mongoose.model<IOder>("Order",IOderSchema)
+ export const OrderModel = mongoose.model<IOder>("Order",IOderSchema)

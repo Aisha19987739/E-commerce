@@ -2,6 +2,8 @@ import userModel from "../models/userModel";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
+import {  OrderModel } from "../models/OrderModel";
+
 dotenv.config();
 
 
@@ -65,6 +67,19 @@ export const login = async ({ email, password }: loginParams) => {
     throw err;
   }
 };
+interface GetMyOrdersParams{
+  userId:string
+}
+export const getMyOrders=async({userId}:GetMyOrdersParams)=>{
+  try{
+    return{data:await OrderModel.find({userId}),stausCode:200} 
+  }
+  catch(err){
+    throw err;
+  }
+  
+
+}
 
 
 //  export const login = async ({ email, password }: loginParams) => {

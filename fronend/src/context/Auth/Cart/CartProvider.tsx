@@ -9,6 +9,7 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const [error, setError] = useState(" ");
+  const [myOrders,setmyOrders]=useState();
   useEffect(() => {
     if (!token) {
       console.warn("Token is not ready yet, skipping fetch.");
@@ -221,6 +222,7 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
       console.error(error);
     }
   };
+ 
 
   
 
@@ -232,7 +234,8 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
         addItemToCart,
         updateItemInCart,
         removItemInCart,
-        clearCart
+        clearCart,
+       
       }}
     >
       {children}

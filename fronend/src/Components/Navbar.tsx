@@ -44,6 +44,11 @@ function Navbar() {
   const handleCart=()=>{
     navigate("/cart");
   }
+  const handelMyOrders=()=>{
+    navigate("/my-orders");
+    handleCloseUserMenu();
+
+  }
 
   return (
     <AppBar position="static">
@@ -134,7 +139,7 @@ function Navbar() {
                     open={Boolean(anchorElUser)}
                     onClose={handleCloseUserMenu}
                   >
-                    <MenuItem onClick={handleCloseUserMenu}>
+                    <MenuItem onClick={handelMyOrders}>
                       <Typography sx={{ textAlign: "center" }}>
                         My Order
                       </Typography>

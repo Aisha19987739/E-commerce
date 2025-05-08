@@ -8,6 +8,8 @@ interface AuthContextType {
   isAuthentcated: boolean;
   logout:()=>void
   initialized: boolean;
+  getMyOrders:()=>void;
+  myOrders:any
  
   
 }
@@ -17,7 +19,9 @@ export const AuthContext = createContext<AuthContextType>({
   isAuthentcated: false,
   login: () => {},
   logout:()=>{},
-  initialized: false
+  initialized: false,
+  getMyOrders:()=>{},
+  myOrders:[]
   
 });
 export const UseAuth = () => useContext(AuthContext);

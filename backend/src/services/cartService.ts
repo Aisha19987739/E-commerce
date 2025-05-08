@@ -1,5 +1,5 @@
 import cartModel, { Icart, IcartItem } from "../models/cartModel";
-import { IorderItem, OderModel } from "../models/orderModel";
+import { IorderItem, OrderModel } from "../models/OrderModel";
 import { productModules } from "../models/productModel";
 
 interface createCartForUser {
@@ -205,7 +205,7 @@ export const checkout = async ({ userId, address }: Checkout) => {
     };
     orderItems.push(orderItem);
   }
-  const order = await OderModel.create({
+  const order = await OrderModel.create({
     orderItems,
     total: cart.totalAmount,
     address,
